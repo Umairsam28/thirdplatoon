@@ -12,7 +12,7 @@
                 <h2>Categories</h2>
                 <ul class="category-select">
                     @foreach($categories as $category)
-                        <li>{{$category->name}}</li>
+                    <li>{{$category->name}}</li>
                     @endforeach
                 </ul>
                 <h2>MOST VIEWED</h2>
@@ -20,11 +20,11 @@
                     @foreach($mostViewed as $mv)
                     <li>
                         @if(count($mv->images)>0)
-                            <img src="{{asset('storage/products/'.$mv->id.'/'.$mv->images[0]->image_path)}}" />
+                        <img src="{{asset('storage/products/'.$mv->id.'/'.$mv->images[0]->image_path)}}" />
                         @else
-                            <img src="assets/images/placeholder.png" />
+                        <img src="assets/images/placeholder.png" />
                         @endif
-                        <h4>{{$mv->name}}</h4>
+                        <h4><a href="{{route('shop.detail',[$mv])}}">{{$mv->name}}</a></h4>
                         <span>${{$mv->price}}</span>
                     </li>
                     @endforeach
@@ -33,15 +33,17 @@
             <div class="col-md-9">
                 <div class="row products_list">
                     @foreach($products as $product)
-                        <div class="col-md-4 product-card">
+                    <div class="col-md-4 product-card">
+                        <a href="{{route('shop.detail',[$product])}}">
                             @if(count($product->images)>0)
                             <img src="{{asset('storage/products/'.$product->id.'/'.$product->images[0]->image_path)}}" />
                             @else
-                                <img src="assets/images/placeholder.png" />
+                            <img src="assets/images/placeholder.png" />
                             @endif
                             <h4>{{$product->name}}</h4>
                             <h5>${{$product->price}}</h5>
-                        </div>
+                        </a>
+                    </div>
                     @endforeach
                 </div>
                 {{$products->links()}}

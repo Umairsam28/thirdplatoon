@@ -91,7 +91,7 @@ Route::get("/", [HomeController::class, "index"])->name('home');
 
 /*Ecommerce Frontend*/
 Route::get("/shop", [FrontProductController::class, "index"])->name('shop');
-
+Route::get("/product/{product}", [FrontProductController::class, "detail"])->name('shop.detail');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');

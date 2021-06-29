@@ -14,4 +14,8 @@ class ProductController extends Controller
         return view('frontend.ecommerce.product.index')
         ->with(compact('categories','products','mostViewed'));
     }
+    public function detail(Product $product){
+        return view('frontend.ecommerce.product.detail')
+        ->with(compact('product'));
+    }
 }
