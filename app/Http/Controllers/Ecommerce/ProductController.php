@@ -18,4 +18,12 @@ class ProductController extends Controller
         return view('frontend.ecommerce.product.detail')
         ->with(compact('product'));
     }
+
+    public function cart(){
+        return view('frontend.ecommerce.product.cart');
+    }
+
+    public function checkout(){
+        return view('frontend.ecommerce.product.checkout');
+    }
 }
