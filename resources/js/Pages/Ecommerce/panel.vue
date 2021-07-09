@@ -47,7 +47,7 @@
             rounded
           "
         >
-          <inertia-link href="/"
+          <inertia-link href="/admin/orders"
             >Orders
             <span
               class="
@@ -62,7 +62,7 @@
                 text-white
                 w-24
               "
-              >5</span
+              >{{ordersCount}}</span
             ></inertia-link
           >
         </li>
@@ -153,7 +153,8 @@ export default {
     return {
       productCount: 0,
       categoryCount: 0,
-      vendorsCount: 0
+      vendorsCount: 0,
+      ordersCount: 0
     };
   },
   methods: {
@@ -164,6 +165,7 @@ export default {
       this.productCount = _data.productCount;
       this.categoryCount = _data.categoryCount;
       this.vendorsCount = _data.vendorsCount
+      this.ordersCount = _data.ordersCount
     }
   },
   mounted () {

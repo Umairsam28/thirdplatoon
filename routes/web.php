@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\JobsCategoryController as AdminJobsCategoryContro
 use App\Http\Controllers\Admin\EcommerceController as AdminEcommerceController;
 use App\Http\Controllers\Admin\Ecommerce\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\Ecommerce\CategoryController as AdminEcommerceCategoryController;
+use App\Http\Controllers\Admin\Ecommerce\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\Ecommerce\VendorsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdsController;
@@ -45,6 +46,7 @@ Route::get('admin/ecommerce/summary', [AdminEcommerceController::class, 'summary
 ->name('admin.ecommerce.summary')->middleware('auth');
 Route::resource('admin/products', AdminProductController::class, ['as' => 'admin'])->middleware('auth');
 Route::resource('admin/ecommerce/category', AdminEcommerceCategoryController::class, ['as' => 'admin.ecommerce'])->middleware('auth');
+Route::resource('admin/orders', AdminOrderController::class, ['as' => 'admin'])->middleware('auth');
 Route::get('admin/ecommerce/vendors', [VendorsController::class, 'index'])
 ->name('admin.ecommerce.vendors')->middleware('auth');
 Route::get('admin/ecommerce/vendors-toggle/{user}', [VendorsController::class, 'setAsVendor'])
@@ -91,10 +93,14 @@ Route::get("/", [HomeController::class, "index"])->name('home');
 
 /*Ecommerce Frontend*/
 Route::get("/shop", [FrontProductController::class, "index"])->name('shop');
+Route::get("/cart/add/{product}", [FrontProductController::class, "cartadd"])->name('add.cart');
+Route::post("/cart/qtyUpdate", [FrontProductController::class, "cartqtyUpdate"])->name('cart.qtyUpdate');
 Route::get("/product/{product}", [FrontProductController::class, "detail"])->name('shop.detail');
 Route::get("cart", [FrontProductController::class, "cart"])->name('cart');
 Route::get("checkout", [FrontProductController::class, "checkout"])->name('checkout');
-
+Route::post("placeOrder", [FrontProductController::class, "placeOrder"])->name('placeOrder');
+Route::get("order/payment/{order}", [FrontProductController::class, "orderPayment"])->name('order.payment');
+Route::get("order/invoice/{order}", [FrontProductController::class, "orderInvoice"])->name('order.invoice');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');

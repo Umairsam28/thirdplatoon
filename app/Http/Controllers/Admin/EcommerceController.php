@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\{Product, EcommerceCategory, User};
+use App\Models\{Product, EcommerceCategory, User, Order};
 class EcommerceController extends Controller
 {
     public function index()
@@ -16,6 +16,12 @@ class EcommerceController extends Controller
         $productCount = Product::count();
         $categoryCount = EcommerceCategory::count();
         $vendorsCount = User::vendors()->count();
-        return response()->json(['productCount'=>$productCount,'categoryCount'=>$categoryCount,'vendorsCount'=>$vendorsCount]);
+        $ordersCount = Order::count();
+        return response()->json([
+            'productCount'=>$productCount,
+            'categoryCount'=>$categoryCount,
+            'vendorsCount'=>$vendorsCount,
+            'ordersCount'=>$ordersCount
+        ]);
     }
 }

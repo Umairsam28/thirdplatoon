@@ -11,6 +11,14 @@
 <section class="productdetail_sec">
   <div class="container">
     <div class="row">
+    @if(session()->has('msg'))
+			@if(session()->get('msg')['type'] == 'success')
+				<div class="alert alert-success">{{ session()->get('msg')['text'] }}</div>
+			@endif
+			@if(session()->get('msg')['type'] == 'error')
+				<div class="alert alert-danger">{{ session()->get('msg')['text'] }}</div>
+			@endif
+		@endif
       <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
         <div class="productdescr_img">
           <div class="slickproduct_slider">
@@ -55,7 +63,7 @@
           <?php print $product->description; ?>
 
           <div class="btn-appointment-detail">
-            <a href="{{route('add.cart')}}">Add To Cart</a>
+            <a href="{{route('add.cart',[$product])}}">Add To Cart</a>
           </div>
 
           <div class="share-icon">

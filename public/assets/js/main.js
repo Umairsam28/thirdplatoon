@@ -45,3 +45,43 @@ $('.slider-for').slick({
     input.val(1);
     }
     });
+
+    function ajaxifyN(d,m,u){
+        if(typeof d !='string'){
+          d = $.param(d);
+        }
+        return new Promise(function(resolve, reject) {
+          var xhhtp = new XMLHttpRequest();
+          xhhtp.onreadystatechange = function() {
+            if (this.status == 200&&this.readyState==4){
+              if(!isJSON(xhhtp.responseText)){
+                throw 'Result is not in JSON format';
+              } else {
+                resolve(JSON.parse(xhhtp.responseText));
+              }
+            } else if(this.status==404){
+              reject(Error('Error occured'));
+            }
+          };
+          xhhtp.onload = function () {
+              
+          };
+          xhhtp.open(m, u, true);
+          xhhtp.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+          xhhtp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          try {
+            xhhtp.send(d)
+          }catch(ex){
+            reject(Error('Error occured'));
+          }
+        });
+      }
+      function isJSON(json) {
+        try {
+          var obj = JSON.parse(json)
+          if (obj && typeof obj === 'object' && obj !== null) {
+            return true
+          }
+        } catch (err) {}
+        return false
+      }

@@ -13,24 +13,30 @@
     <div class="row">
       
       <div class="checkout-tab-main">
+      @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+        <form method="POST" action="{{route('placeOrder')}}">
+          @csrf
         <div class="col-xs-12 col-sm-12 col-md-8">
           <div class="form-sec-checkout">
             <div class="checkout-heading">
               <h3>Billing Address</h3>
             </div>
             <div class="form-tab ">
-              <form>
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-3 col-sm-3">
                       <label for="">Country <span>*</span></label>
                     </div>
                     <div class="col-md-9 col-sm-9">
-                      <select class="form-control" id="" name="">
-                        <option value="">
-                          United state of america
-                        </option>
-                      </select>
+                      <input value="{{old('country')}}" type="text" class="form-control" name="country" required />
                     </div>
                   </div>
                 </div>
@@ -40,7 +46,7 @@
                       <label for="">First Name <span>*</span></label>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input class="form-control" type="text">
+                      <input value="{{old('first_name')}}" class="form-control" name="first_name" type="text">
                     </div>
                   </div>
                 </div>
@@ -50,17 +56,17 @@
                       <label for="">Last Name <span>*</span></label>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input class="form-control" type="text">
+                      <input value="{{old('last_name')}}" class="form-control" name="last_name" type="text">
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-3 col-sm-3 col-xs-12">
-                      <label for="">Company Name <span>*</span></label>
+                      <label for="">Company Name </label>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input class="form-control" type="text">
+                      <input value="{{old('company_name')}}" class="form-control" name="company_name" type="text">
                     </div>
                   </div>
                 </div>
@@ -70,14 +76,14 @@
                       <label for="">Address</label>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input class="form-control" placeholder="Street Address" type="text">
+                      <input value="{{old('address')}}" class="form-control" name="address" placeholder="Street Address" type="text">
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <div class="row">
                     <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                      <input class="form-control" type="text">
+                      <input value="{{old('address2')}}" class="form-control" name="address2" type="text">
                     </div>
                   </div>
                 </div>
@@ -87,7 +93,7 @@
                       <label for="">Town / City <span>*</span></label>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input class="form-control" placeholder="Town / City" type="text">
+                      <input value="{{old('town')}}" class="form-control" name="town" placeholder="Town / City" type="text">
                     </div>
                   </div>
                 </div>
@@ -97,7 +103,7 @@
                       <label for="">Email Address <span>*</span></label>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input class="form-control" type="text">
+                      <input value="{{old('email')}}" class="form-control" name="email" type="text">
                     </div>
                   </div>
                 </div>
@@ -107,11 +113,11 @@
                       <label for="">Phone</label>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input class="form-control" type="text">
+                      <input value="{{old('phone')}}" class="form-control" name="phone" type="text">
                     </div>
                   </div>
                 </div>
-              </form>
+              
             </div>
           </div>
         </div>
@@ -125,33 +131,26 @@
               <div class="chk-one">
               <div class="checkoutBody">
                 <ul class="list-unstyled">
-                  <li>Card Subtotal x 1 <span class="pull-right">$132</span></li>
-                  <li>Shipping <span class="pull-right">Free Shipping</span></li>
-                  <li>Order Total <span class="pull-right">$123</span></li>
+                  <?php $sum=0; ?>
+                  @foreach($cart as $car)
+                    <li>{{$car['product']->name}} x {{$car['qty']}} <span class="pull-right">${{$car['rowtotal']}}</span></li>
+                    <?php $sum+=$car['rowtotal']; ?>
+                  @endforeach
+                  <!-- <li>Shipping <span class="pull-right">Free Shipping</span></li> -->
+                  <li>Order Total <span class="pull-right">${{$sum}}</span></li>
                 </ul>
                 <h3>Payment Method</h3>
               </div>
               <div class="checkoutFoot">
-                <div class="paypal-select">
-                  <ul>
-                    <li>
-                      <input type="radio" id="radio1" name="radio-group" checked="">
-                      <label for="radio1"><span> Cheque Payment</span></label>
-                    </li>
-                    <li>
-                      <input type="radio" id="radio2" name="radio-group">
-                      <label for="radio2"><span>Paypal <img src="../assets/images/img9.png" class="img-responsive"></span></label>
-                    </li>
-                  </ul>
-                </div>
                 <div class="web-btn">
-                  <a href="#">PLACE ORDER</a>
+                  <button type="submit">PLACE ORDER</button>
                 </div>
               </div>
               </div>
             </div>
           </div>
         </div>
+        </form>
       </div>
     </div>
   </div>

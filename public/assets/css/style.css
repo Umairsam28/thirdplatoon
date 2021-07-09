@@ -1363,9 +1363,9 @@ section.about-sec {
     color: #737373;
 }
 
-.checkoutSec .web-btn {text-align: center;padding-top: 0;}
+.checkoutSec .web-btn {text-align: center;padding-top: 0;margin-top: 15px;}
 
-.checkoutSec .web-btn a {
+.checkoutSec .web-btn a, .checkoutSec .web-btn button {
     background-color: #0591d7;
     text-transform: uppercase;
     font-size: 18px;
@@ -1374,9 +1374,10 @@ section.about-sec {
     border-radius: 8px;
     display: inline-block;
     color: #fff;
+    border: none;
 }  
 
-.checkoutSec .web-btn a:hover{
+.checkoutSec .web-btn a:hover, .checkoutSec .web-btn button:hover{
   background-color: #282828;
 }
 .paypal-select ul li span {

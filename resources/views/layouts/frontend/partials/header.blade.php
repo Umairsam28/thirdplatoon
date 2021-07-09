@@ -13,6 +13,7 @@
 
             <div class="col-md-5">
                 <ul class="wish-ul text-right">
+                    <li><a href="{{route('cart')}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> cart</a></li>
                     <li><a href="javascript:void(0);"><i class="fa fa-heart" aria-hidden="true"></i> wishlist</a></li>
                     <li>
                         @if (Route::has('login'))
