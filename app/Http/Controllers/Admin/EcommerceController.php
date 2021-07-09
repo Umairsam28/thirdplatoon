@@ -11,7 +11,7 @@ class EcommerceController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Ecommerce/panel');
+        return Inertia::render('Ecommerce/panel',['isOnEcomPage'=>true]);
     }
     public function summary () {
         $productCount = Product::where('user_id',Auth::user()->id)->count();

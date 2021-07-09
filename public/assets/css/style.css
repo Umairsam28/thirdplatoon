@@ -651,14 +651,14 @@ ul.social-ul-top i {
     margin-right: 5px;
 }
 
-ul.main-nav-ul li:last-child, ul.main-nav-ul li:nth-last-child(2) {
+ul.main-nav-ul li:last-child {
     background: #2e3292;
     padding: 8px 20px;
     border-radius: 5px;
     text-transform: uppercase;
 }
 
-ul.main-nav-ul li:last-child:hover, ul.main-nav-ul li:nth-last-child(2):hover {
+ul.main-nav-ul li:last-child:hover {
     background-color: #000000;
     transition: 0.3s;
 }
@@ -667,9 +667,6 @@ ul.main-nav-ul li:not(:last-child) {
     margin-right: 10px;
 }
 
-ul.main-nav-ul li:nth-last-child(2) {
-    margin-left: 25px;
-}
 
 section.form-area input[type=submit]:hover {
     background: #000;

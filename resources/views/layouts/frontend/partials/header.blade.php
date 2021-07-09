@@ -64,8 +64,8 @@
                     <li><a href="{{ route('blog.index') }}">Blog </a></li>
                     <li><a href="{{ route('contact_us') }}">Contact us</a></li>
                     <li><a href="{{ route('jobs.index') }}">Jobs Listing</a></li>
+                    <li><a href="{{ route('shop') }}">Products</a></li>
                     <li><a href="{{ route('ads.index') }}">Ads Listing</a></li>
-                    <li><a href="{{ route('shop') }}">Shop</a></li>
                 </ul>
             </div>
         </div>

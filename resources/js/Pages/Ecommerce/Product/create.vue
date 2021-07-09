@@ -196,6 +196,33 @@
         />
       </div>
     </div>
+    <div class="grid grid-cols-12 gap-6 mb-4">
+      <div class="col-span-6">
+        <label for="category_id" class="block text-gray-700 text-sm font-bold mb-2"
+          >Category:</label
+        >
+        <select
+          v-model="form.category_id"
+          id="category_id"
+          class="
+            shadow
+            appearance-none
+            border
+            rounded
+            w-full
+            py-2
+            px-3
+            text-gray-700
+            leading-tight
+            focus:outline-none
+            focus:shadow-outline
+          "
+        >
+          <option value="0">Please Select</option>
+          <option :key="category.id" :value="category.id" v-for="category in categoryList">{{category.name}}</option>
+        </select>
+      </div>
+    </div>
     <div class="bg-gray-200 p-2">
       <h1 @click="mediaOpen = !mediaOpen" class="font-bold text-black">
         Media Management
@@ -385,7 +412,9 @@ export default {
   components: {
     AppLayout,
   },
-  props: {},
+  props: {
+    categoryList: Array,
+  },
   data() {
     return {
       form: {
@@ -401,6 +430,7 @@ export default {
         description: "",
         price: 0,
         discount: 0,
+        category_id: 0,
       },
       editor: ClassicEditor,
       editorConfig: {
@@ -431,7 +461,6 @@ export default {
     formDataSend () {
       const files = this.$refs.images.files;
       const data = new FormData();
-      console.log(files)
       data.append('_method','POST');
       for(var i = 0; i < files.length; i++){
         data.append('images['+i+']', files[i]);
