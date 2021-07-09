@@ -3569,6 +3569,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -6111,6 +6112,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6121,7 +6124,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       productCount: 0,
       categoryCount: 0,
       vendorsCount: 0,
-      ordersCount: 0
+      ordersCount: 0,
+      user: {}
     };
   },
   methods: {
@@ -6147,7 +6151,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this.productCount = _data.productCount;
                 _this.categoryCount = _data.categoryCount;
                 _this.vendorsCount = _data.vendorsCount;
-                _this.ordersCount = _data.ordersCount;
+                _this.ordersCount = _data.ordersCount, _this.user = _data.user;
 
               case 7:
               case "end":
@@ -43568,20 +43572,24 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "jet-nav-link",
-                      {
-                        attrs: {
-                          href: _vm.route("admin.ecommerce.index"),
-                          active: _vm.route().current("admin.ecommerce.index")
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Ecommerce\n                        "
+                    _vm.$page.user.is_vendor == 1
+                      ? _c(
+                          "jet-nav-link",
+                          {
+                            attrs: {
+                              href: _vm.route("admin.ecommerce.index"),
+                              active: _vm
+                                .route()
+                                .current("admin.ecommerce.index")
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Ecommerce\n                        "
+                            )
+                          ]
                         )
-                      ]
-                    )
+                      : _vm._e()
                   ],
                   1
                 )
@@ -48699,57 +48707,61 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass:
-                      "\n          transition\n          duration-200\n          ease-linear\n          flex\n          hover:bg-blue-500\n          hover:text-white\n          items-center\n          p-1.5\n          rounded\n        "
-                  },
-                  [
-                    _c(
-                      "inertia-link",
-                      { attrs: { href: "/admin/ecommerce/category" } },
+                _vm.user.user_type == "admin"
+                  ? _c(
+                      "li",
+                      {
+                        staticClass:
+                          "\n          transition\n          duration-200\n          ease-linear\n          flex\n          hover:bg-blue-500\n          hover:text-white\n          items-center\n          p-1.5\n          rounded\n        "
+                      },
                       [
-                        _vm._v("Categories\n          "),
                         _c(
-                          "span",
-                          {
-                            staticClass:
-                              "\n              bg-blue-900\n              border-red-900\n              h-24\n              items-center\n              justify-center\n              px-3\n              py-1\n              rounded-full\n              text-white\n              w-24\n            "
-                          },
-                          [_vm._v(_vm._s(_vm.categoryCount))]
+                          "inertia-link",
+                          { attrs: { href: "/admin/ecommerce/category" } },
+                          [
+                            _vm._v("Categories\n          "),
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "\n              bg-blue-900\n              border-red-900\n              h-24\n              items-center\n              justify-center\n              px-3\n              py-1\n              rounded-full\n              text-white\n              w-24\n            "
+                              },
+                              [_vm._v(_vm._s(_vm.categoryCount))]
+                            )
+                          ]
                         )
-                      ]
+                      ],
+                      1
                     )
-                  ],
-                  1
-                ),
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass:
-                      "\n          transition\n          duration-200\n          ease-linear\n          flex\n          hover:bg-blue-500\n          hover:text-white\n          items-center\n          p-1.5\n          rounded\n        "
-                  },
-                  [
-                    _c(
-                      "inertia-link",
-                      { attrs: { href: "/admin/ecommerce/vendors" } },
+                _vm.user.user_type == "admin"
+                  ? _c(
+                      "li",
+                      {
+                        staticClass:
+                          "\n          transition\n          duration-200\n          ease-linear\n          flex\n          hover:bg-blue-500\n          hover:text-white\n          items-center\n          p-1.5\n          rounded\n        "
+                      },
                       [
-                        _vm._v("Vendors\n          "),
                         _c(
-                          "span",
-                          {
-                            staticClass:
-                              "\n              bg-blue-900\n              border-red-900\n              h-24\n              items-center\n              justify-center\n              px-3\n              py-1\n              rounded-full\n              text-white\n              w-24\n            "
-                          },
-                          [_vm._v(_vm._s(_vm.vendorsCount))]
+                          "inertia-link",
+                          { attrs: { href: "/admin/ecommerce/vendors" } },
+                          [
+                            _vm._v("Vendors\n          "),
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "\n              bg-blue-900\n              border-red-900\n              h-24\n              items-center\n              justify-center\n              px-3\n              py-1\n              rounded-full\n              text-white\n              w-24\n            "
+                              },
+                              [_vm._v(_vm._s(_vm.vendorsCount))]
+                            )
+                          ]
                         )
-                      ]
+                      ],
+                      1
                     )
-                  ],
-                  1
-                )
+                  : _vm._e()
               ])
             ]
           },

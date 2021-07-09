@@ -67,6 +67,7 @@
           >
         </li>
         <li
+          v-if="user.user_type=='admin'"
           class="
             transition
             duration-200
@@ -99,6 +100,7 @@
           >
         </li>
         <li
+          v-if="user.user_type=='admin'"
           class="
             transition
             duration-200
@@ -154,7 +156,8 @@ export default {
       productCount: 0,
       categoryCount: 0,
       vendorsCount: 0,
-      ordersCount: 0
+      ordersCount: 0,
+      user: {}
     };
   },
   methods: {
@@ -165,7 +168,8 @@ export default {
       this.productCount = _data.productCount;
       this.categoryCount = _data.categoryCount;
       this.vendorsCount = _data.vendorsCount
-      this.ordersCount = _data.ordersCount
+      this.ordersCount = _data.ordersCount,
+      this.user = _data.user
     }
   },
   mounted () {

@@ -62,6 +62,7 @@
                             <jet-nav-link
                                 :href="route('admin.ecommerce.index')"
                                 :active="route().current('admin.ecommerce.index')"
+                                v-if="$page.user.is_vendor == 1"
                             >
                                 Ecommerce
                             </jet-nav-link>

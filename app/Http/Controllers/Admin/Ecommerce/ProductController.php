@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Ecommerce;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Auth;
 use App\Models\{Product, ProductImage};
 use Illuminate\Support\Facades\Redirect;
 
@@ -12,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $data = Product::orderBy('id', 'desc')->paginate(20);
+        $data = Product::orderBy('id', 'desc')->where('user_id',Auth::user()->id)->paginate(20);
         return Inertia::render('Ecommerce/Product/list',['productList'=>$data]);
     }
     public function create()
@@ -26,6 +27,7 @@ class ProductController extends Controller
         ]);
         $data['handle_stock'] = $request->handle_stock==='true'?1:0;
         $data['is_active'] = $request->is_active==='true'?1:0;
+        $data['user_id'] =Auth::user()->id;
         $product = Product::create($data);
         if($request->images){
             foreach($request->images as $file){
